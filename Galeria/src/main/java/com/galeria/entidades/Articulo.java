@@ -14,7 +14,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.galeria.utiles.tipoArticulo;
+import com.galeria.enumeraciones.EstadoArticulo;
+import com.galeria.enumeraciones.TipoArticulo;
 
 @Entity
 public class Articulo {
@@ -37,7 +38,7 @@ public class Articulo {
 
 	@NotBlank(message = "El tipo es obligatorio")
 	@Enumerated(value = EnumType.STRING)
-	private tipoArticulo tipo;
+	private TipoArticulo tipo;
 	
 	@NotBlank(message = "Una pequeña descripción es necesaria")
 	private String descripcion;
@@ -54,8 +55,36 @@ public class Articulo {
 	
 	private String comentarios;
 	
-	@NotBlank()
-	private String estado;
+	@Enumerated(value = EnumType.STRING)
+	private EstadoArticulo estado;
+	
+	@NotBlank(message = "El precio es obligatorio")
+	private Float precio;
+	
+	public Articulo() {}
+
+	public Articulo(Long id, Artista artista, Cliente cliente,
+			@NotBlank(message = "El título es obligatorio") String titulo,
+			@NotBlank(message = "El tipo es obligatorio") TipoArticulo tipo,
+			@NotBlank(message = "Una pequeña descripción es necesaria") String descripcion, Boolean firmado,
+			Integer numeracion, String editor, String medidas, String pisada, String comentarios, EstadoArticulo estado,
+			@NotBlank(message = "El precio es obligatorio") Float precio) {
+		super();
+		this.id = id;
+		this.artista = artista;
+		this.cliente = cliente;
+		this.titulo = titulo;
+		this.tipo = tipo;
+		this.descripcion = descripcion;
+		this.firmado = firmado;
+		this.numeracion = numeracion;
+		this.editor = editor;
+		this.medidas = medidas;
+		this.pisada = pisada;
+		this.comentarios = comentarios;
+		this.estado = estado;
+		this.precio = precio;
+	}
 
 	public Long getId() {
 		return id;
@@ -89,11 +118,11 @@ public class Articulo {
 		this.titulo = titulo;
 	}
 
-	public tipoArticulo getTipo() {
+	public TipoArticulo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(tipoArticulo tipo) {
+	public void setTipo(TipoArticulo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -153,11 +182,11 @@ public class Articulo {
 		this.comentarios = comentarios;
 	}
 
-	public String getEstado() {
+	public EstadoArticulo getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoArticulo estado) {
 		this.estado = estado;
 	}
 	

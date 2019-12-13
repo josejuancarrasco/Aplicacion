@@ -34,6 +34,22 @@ public class Artista {
     
     @Temporal(TemporalType.DATE)
     private Calendar fecha_fall;
+    
+    public Artista() {}
+
+	public Artista(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
+			@NotBlank(message = "El primer es obligatorio") String apellido_1, String apellido_2,
+			String lugar_nacimiento, String lugar_fallecimiento, Calendar fecha, Calendar fecha_fall) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido_1 = apellido_1;
+		this.apellido_2 = apellido_2;
+		this.lugar_nacimiento = lugar_nacimiento;
+		this.lugar_fallecimiento = lugar_fallecimiento;
+		this.fecha = fecha;
+		this.fecha_fall = fecha_fall;
+	}
 
 	public Long getId() {
 		return id;
