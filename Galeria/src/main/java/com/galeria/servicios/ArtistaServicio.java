@@ -1,23 +1,25 @@
 package com.galeria.servicios;
 
+
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galeria.entidades.Artista;
 import com.galeria.repositorios.ArtistaRepositorio;
 
-
 @Service
 public class ArtistaServicio implements IArtistaServicio{
 	
-
+	@Autowired
 	private ArtistaRepositorio repositorio;
 
 	@Override
 	public List<Artista> getAllArtist() {
-		// TODO Auto-generated method stub
-		return (List<Artista>) this.repositorio.findAll() ;
+		
+		return this.repositorio.findAll();
+		
 	}
 
 	@Override
@@ -29,8 +31,8 @@ public class ArtistaServicio implements IArtistaServicio{
 	@Override
 	public synchronized boolean addArtist(Artista artista) {
 		
-		this.repositorio.save(artista);
-		return true;
+		return this.repositorio.save(artista) != null;
+		
 	}
 
 	@Override

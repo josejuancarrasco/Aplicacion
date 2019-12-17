@@ -1,13 +1,11 @@
 package com.galeria.entidades;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -25,29 +23,27 @@ public class Artista {
  
     private String apellido_2;
     
-    private String lugar_nacimiento;
+    private String lugar_nac;
     
-    private String lugar_fallecimiento;
+    private String lugar_fall;
     
-    @Temporal(TemporalType.DATE)
-    private Calendar fecha ;
+    private LocalDate fecha_nac ;
     
-    @Temporal(TemporalType.DATE)
-    private Calendar fecha_fall;
+    private LocalDate fecha_fall;
     
     public Artista() {}
 
 	public Artista(Long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
 			@NotBlank(message = "El primer es obligatorio") String apellido_1, String apellido_2,
-			String lugar_nacimiento, String lugar_fallecimiento, Calendar fecha, Calendar fecha_fall) {
+			String lugar_nacimiento, String lugar_fallecimiento, LocalDate fecha, LocalDate fecha_fall) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido_1 = apellido_1;
 		this.apellido_2 = apellido_2;
-		this.lugar_nacimiento = lugar_nacimiento;
-		this.lugar_fallecimiento = lugar_fallecimiento;
-		this.fecha = fecha;
+		this.lugar_nac = lugar_nacimiento;
+		this.lugar_fall = lugar_fallecimiento;
+		this.fecha_nac = fecha;
 		this.fecha_fall = fecha_fall;
 	}
 
@@ -83,35 +79,35 @@ public class Artista {
 		this.apellido_2 = apellido_2;
 	}
 
-	public String getLugar_nacimiento() {
-		return lugar_nacimiento;
+	public String getLugar_nac() {
+		return lugar_nac;
 	}
 
-	public void setLugar_nacimiento(String lugar_nacimiento) {
-		this.lugar_nacimiento = lugar_nacimiento;
+	public void setLugar_nac(String lugar_nacimiento) {
+		this.lugar_nac = lugar_nacimiento;
 	}
 
-	public String getLugar_fallecimiento() {
-		return lugar_fallecimiento;
+	public String getLugar_fall() {
+		return lugar_fall;
 	}
 
-	public void setLugar_fallecimiento(String lugar_fallecimiento) {
-		this.lugar_fallecimiento = lugar_fallecimiento;
+	public void setLugar_fall(String lugar_fallecimiento) {
+		this.lugar_fall = lugar_fallecimiento;
 	}
 
-	public Calendar getFecha() {
-		return fecha;
+	public LocalDate getFecha_nac() {
+		return fecha_nac;
 	}
 
-	public void setFecha(Calendar fecha) {
-		this.fecha = fecha;
+	public void setFecha_nac(LocalDate fecha_nac) {
+		this.fecha_nac = fecha_nac;
 	}
 
-	public Calendar getFecha_fall() {
+	public LocalDate getFecha_fall() {
 		return fecha_fall;
 	}
 
-	public void setFecha_fall(Calendar fecha_fall) {
+	public void setFecha_fall(LocalDate fecha_fall) {
 		this.fecha_fall = fecha_fall;
 	}
     

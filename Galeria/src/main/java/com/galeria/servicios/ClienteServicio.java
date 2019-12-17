@@ -27,7 +27,7 @@ public class ClienteServicio implements IClienteServicio{
 	}
 
 	@Override
-	public boolean addCliente(Cliente cliente) {
+	public synchronized boolean addCliente(Cliente cliente) {
 		
 		return this.repositorio.save(cliente) != null;
 	
