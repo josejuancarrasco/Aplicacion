@@ -1,15 +1,14 @@
 package com.galeria.repositorios;
 
-import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.galeria.entidades.Artista;
 
 @Repository
-public interface ArtistaRepositorio extends CrudRepository<Artista, Long>  {
+public interface ArtistaRepositorio extends JpaRepository<Artista, Long>  {
 
-	List<Artista> buscarNombre(String name);
+	//List<Artista> buscarNombre(String name);
 	
 }

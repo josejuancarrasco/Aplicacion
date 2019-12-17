@@ -26,7 +26,7 @@ public class ArticuloServicio implements IArticuloServicio{
 	}
 
 	@Override
-	public boolean addArticulo(Articulo articulo) {
+	public synchronized boolean addArticulo(Articulo articulo) {
 		
 		return this.repositorio.save(articulo) != null;
 		
