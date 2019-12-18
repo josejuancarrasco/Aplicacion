@@ -8,14 +8,14 @@ import com.galeria.entidades.Artista;
 
 public interface IArtistaServicio {
 
-	List<Artista> getAllArtist();
+	List<Artista> getAll();
 	
-	Artista getArtistById(Long id);
+	Artista getById(Long id);
 	
-	boolean addArtist(Artista artista);
+	boolean add(Artista artista);
 	
-	void updateArtist(Artista artist);
+	void update(Artista artist);
 	
-	void deleteArtist(Long id);
+	void delete(Long id);
 	
 }

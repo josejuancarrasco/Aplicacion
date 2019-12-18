@@ -6,14 +6,14 @@ import com.galeria.entidades.Articulo;
 
 public interface IArticuloServicio {
 
-	List<Articulo> getAllArticulo();
+	List<Articulo> getAll();
 	
-	Articulo getArticuloById(Long id);
+	Articulo getById(Long id);
 	
-	boolean addArticulo(Articulo articulo);
+	boolean add(Articulo articulo);
 	
-	void updateArticulo(Articulo articulo);
+	void update(Articulo articulo);
 	
-	void deleteArticulo(Long id);
+	void delete(Long id);
 	
 }

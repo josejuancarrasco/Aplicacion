@@ -1,7 +1,5 @@
 package com.galeria.controladores;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,49 +8,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.galeria.entidades.Artista; 
-import com.galeria.servicios.ArtistaServicio;
-
+import com.galeria.entidades.Articulo;
+import com.galeria.entidades.Artista;
+import com.galeria.servicios.ArticuloServicio;
 
 @Controller
-@RequestMapping("/")
-public class ArtistaControlador {
-
+@RequestMapping(value = "")
+public class ArticuloControlador {
 	@Autowired
-	private ArtistaServicio servicio;
+	private ArticuloServicio servicio;
 	
-	@GetMapping(value = "artista/list")
+	@GetMapping(value = "articulo/list")
 	public String list(Model model) {
 	
-		model.addAttribute("artistas",  this.servicio.getAll());
+		model.addAttribute("articulo",  this.servicio.getAll());
 		
-		return "artistaLista";
+		return "articuloLista";
 	}
 	
-	@GetMapping(value = "artista/add")
+	@GetMapping(value = "articulo/add")
 	public String add(Model model) {
 		
 		Artista artista = new Artista();
 		model.addAttribute("artista", artista);
 	
-		return "artistaNuevo" ;
+		return "articuloNuevo" ;
 	}
 	
-	@PostMapping(value = "artista/save")
-	public String save(Artista artista) {
+	@PostMapping(value = "articulo/save")
+	public String save(Articulo articulo) {
 		
-		this.servicio.add(artista);
+		this.servicio.add(articulo);
 		
-		return "redirect:/artista/list";
+		return "redirect:/articulo/list";
 			
 	}
 	
-	@GetMapping(value = "artista/delete/{id}")
+	@GetMapping(value = "articulo/delete/{id}")
 	public String delete(@PathVariable(value="id") Long id) {
 		
 		this.servicio.delete(id);
 		
-		return "redirect:/artista/list";
+		return "redirect:/articulo/list";
 	}
-	
 }

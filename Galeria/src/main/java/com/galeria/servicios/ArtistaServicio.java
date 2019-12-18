@@ -16,34 +16,34 @@ public class ArtistaServicio implements IArtistaServicio{
 	private ArtistaRepositorio repositorio;
 
 	@Override
-	public List<Artista> getAllArtist() {
+	public List<Artista> getAll() {
 		
 		return this.repositorio.findAll();
 		
 	}
 
 	@Override
-	public Artista getArtistById(Long id) {
+	public Artista getById(Long id) {
 		Artista artista = this.repositorio.findById(id).orElse(null);
 		return artista;
 	}
 
 	@Override
-	public synchronized boolean addArtist(Artista artista) {
+	public synchronized boolean add(Artista artista) {
 		
 		return this.repositorio.save(artista) != null;
 		
 	}
 
 	@Override
-	public void updateArtist(Artista artist) {
+	public void update(Artista artist) {
 		
 		this.repositorio.save(artist);
 		
 	}
 
 	@Override
-	public void deleteArtist(Long id) {
+	public void delete(Long id) {
 		this.repositorio.deleteById(id);
 		
 	}

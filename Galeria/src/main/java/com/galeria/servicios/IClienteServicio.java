@@ -6,13 +6,13 @@ import com.galeria.entidades.Cliente;
 
 public interface IClienteServicio {
 	
-	List<Cliente> getAllCliente();
+	List<Cliente> getAll();
 	
-	Cliente getClienteById(Long id);
+	Cliente getById(Long id);
 	
-	boolean addCliente(Cliente cliente);
+	boolean add(Cliente cliente);
 	
-	void updateCliente(Cliente cliente);
+	void update(Cliente cliente);
 	
-	void deleteCliente(Long id);
+	void delete(Long id);
 }
