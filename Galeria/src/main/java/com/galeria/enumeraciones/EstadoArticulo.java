@@ -1,9 +1,7 @@
 package com.galeria.enumeraciones;
 
 public enum EstadoArticulo {
-	
-	EN_PROPIEDAD,
-	VENDIDO,
-	OFERTADO;
-	
+
+	EN_PROPIEDAD, VENDIDO, OFERTADO;
+
 }

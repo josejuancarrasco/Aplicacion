@@ -9,43 +9,28 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	 
+
 	@NotBlank(message = "El nombre es obligatorio")
 	private String nombre;
-	
+
 	@NotBlank(message = "El apellido es obligatorio")
 	private String apellido_1;
-	
+
 	private String apellido_2;
-	
+
 	private Long telefono;
-	
+
 	private String mail;
-	
-	public Cliente() {}
-	
-	public Cliente(long id, @NotBlank(message = "El nombre es obligatorio") String nombre,
-			@NotBlank(message = "El apellido es obligatorio") String apellido_1, String apellido_2, Long telefono,
-			String mail) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido_1 = apellido_1;
-		this.apellido_2 = apellido_2;
-		this.telefono = telefono;
-		this.mail = mail;
+
+	public Cliente() {
 	}
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -87,6 +72,7 @@ public class Cliente {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
 	
-	
+
 }
