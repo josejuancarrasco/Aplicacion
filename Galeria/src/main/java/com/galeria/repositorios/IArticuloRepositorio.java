@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.galeria.entidades.Articulo;
 
 @Repository
-public interface ArticuloRepositorio extends JpaRepository<Articulo, Long> {
+public interface IArticuloRepositorio extends JpaRepository<Articulo, Long> {
 
 }

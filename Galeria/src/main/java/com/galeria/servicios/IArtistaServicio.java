@@ -8,12 +8,12 @@ public interface IArtistaServicio {
 
 	List<Artista> getAll();
 
-	Artista getById(Long id);
+	Artista getById(Long id) throws Exception;
 
-	Artista add(Artista artista);
+	Artista add(Artista artista) throws Exception;
 
-	void update(Artista artist);
+	void update(Artista artist) throws Exception;
 
-	void delete(Long id);
+	void delete(Long id) throws Exception;
 
 }

@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galeria.entidades.Articulo;
-import com.galeria.repositorios.ArticuloRepositorio;
+import com.galeria.repositorios.IArticuloRepositorio;
 
 @Service
 public class ArticuloServicio implements IArticuloServicio {
 
 	@Autowired
-	private ArticuloRepositorio repositorio;
+	private IArticuloRepositorio repositorio;
 
 	@Override
 	public List<Articulo> getAll() {
@@ -28,25 +28,24 @@ public class ArticuloServicio implements IArticuloServicio {
 	}
 
 	@Override
-	public synchronized boolean add(Articulo articulo) {
+	public  Articulo add(Articulo articulo) {
 
-		return this.repositorio.save(articulo) != null;
+		return this.repositorio.save(articulo);
 
 	}
 
 	@Override
-	public void update(Articulo articulo) {
+	public Articulo update(Articulo articulo) {
 
-		this.repositorio.save(articulo);
+		return this.repositorio.save(articulo);
 
 	}
 
 	@Override
 	public void delete(Long id) {
-
+		
 		this.repositorio.deleteById(id);
-		;
-
+		
 	}
 
 }

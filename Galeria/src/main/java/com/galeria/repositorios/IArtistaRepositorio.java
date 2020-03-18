@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.galeria.entidades.Artista;
 
 @Repository
-public interface ArtistaRepositorio extends JpaRepository<Artista, Long> {
+public interface IArtistaRepositorio extends JpaRepository<Artista, Long> {
 
 }

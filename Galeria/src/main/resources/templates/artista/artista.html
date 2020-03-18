@@ -6,13 +6,13 @@
     <main layout:fragment="contenido">
         <div class="col-12">
 
-            <h2>Agregar Artista</h2>
+            <h2 th:text="${editar} == true ? 'Editar Artista' : 'Agregar Artista'"></h2>
 
             <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
                 th:text="${mensaje}" class="alert">
             </div>
 
-            <form th:object="${artista}" th:action="@{/artista/add}" method="post">
+            <form th:object="${artista}" th:action="${editar} == true ? @{/artista/editar/} + ${artista.id} : @{/artista/add}"  method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre del Artista</label>
                     <input autocomplete="off" autofocus th:field="*{nombre}" id="nombre" type="text"

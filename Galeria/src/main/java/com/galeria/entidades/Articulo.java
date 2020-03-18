@@ -1,5 +1,7 @@
 package com.galeria.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,11 +16,18 @@ import javax.persistence.ManyToOne;
 
 import javax.validation.constraints.NotBlank;
 
+
 import com.galeria.enumeraciones.EstadoArticulo;
 import com.galeria.enumeraciones.TipoArticulo;
 
 @Entity
-public class Articulo {
+public class Articulo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,11 +60,14 @@ public class Articulo {
 	//@NotBlank(message = "El precio es obligatorio")
 	private Float precio;
 
-	@Basic(fetch = FetchType.LAZY)
+	@Basic(fetch = FetchType.EAGER)
 	@Lob
-	private byte[] picture;
+	private byte[] imagen;
+	
+	@Lob
+	private String foto64;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_artista", nullable = false)
 	private Artista artista;
 
@@ -154,12 +166,12 @@ public class Articulo {
 		this.precio = precio;
 	}
 
-	public byte[] getPicture() {
-		return picture;
+	public byte[] getImagen() {
+		return imagen;
 	}
 
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 	public Artista getArtista() {
@@ -169,6 +181,15 @@ public class Articulo {
 	public void setArtista(Artista artista) {
 		this.artista = artista;
 	}
+
+	public String getFoto64() {
+		return foto64;
+	}
+
+	public void setFoto64(String foto64) {
+		this.foto64 = foto64;
+	}
+
 
 	
 }

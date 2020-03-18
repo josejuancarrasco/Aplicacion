@@ -8,12 +8,12 @@ public interface IArticuloServicio {
 
 	List<Articulo> getAll();
 
-	Articulo getById(Long id);
+	Articulo getById(Long id) throws Exception;
 
-	boolean add(Articulo articulo);
+	Articulo add(Articulo articulo) throws Exception;
 
-	void update(Articulo articulo);
+	Articulo update(Articulo articulo) throws Exception;
 
-	void delete(Long id);
+	void delete(Long id) throws Exception;
 
 }

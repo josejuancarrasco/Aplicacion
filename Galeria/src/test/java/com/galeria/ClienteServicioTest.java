@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import javax.naming.NameNotFoundException;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ public class ClienteServicioTest {
 
 	@Autowired
 	private IClienteServicio clienteServicio;
-
 	private static Cliente cliente;
 
 	@BeforeAll
@@ -29,7 +30,7 @@ public class ClienteServicioTest {
 	}
 
 	@Test()
-	public void nuevoCliente() {
+	public void nuevoCliente() throws Exception {
 
 		this.clienteServicio.add(cliente);
 
@@ -38,7 +39,7 @@ public class ClienteServicioTest {
 	}
 
 	@Test
-	public void buscarPorId() {
+	public void buscarPorId() throws Exception {
 
 		this.clienteServicio.add(cliente);
 
@@ -47,13 +48,14 @@ public class ClienteServicioTest {
 	}
 
 	@Test
-	public void buscarPorNombre() {
+	public void buscarPorNombre() throws Exception, NameNotFoundException {
 
 		this.clienteServicio.add(cliente);
 
-		List<Cliente> esperado = this.clienteServicio.buscarPorNombre("Jose Juan");
+		List<Cliente> esperado = this.clienteServicio.buscarPorNombre("");
 
 		assertThat(esperado.get(0).getNombre()).isEqualTo("Jose Juan");
 	}
+	
 
 }

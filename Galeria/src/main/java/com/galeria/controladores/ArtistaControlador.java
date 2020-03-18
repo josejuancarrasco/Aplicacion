@@ -34,16 +34,18 @@ public class ArtistaControlador {
 	public String add(Model model) {
 
 		Artista artista = new Artista();
+		
+		model.addAttribute("editar", false);
 		model.addAttribute("artista", artista);
 
-		return "artista/artistaNuevo";
+		return "artista/artista";
 	}
 
 	@PostMapping(value = "/add")
-	public String save(@Valid Artista artista, BindingResult result) {
+	public String save(@Valid Artista artista, BindingResult result) throws Exception {
 
 		if (result.hasErrors()) {
-			return "artista/artistaNuevo";
+			return "artista/artista";
 		}
 
 		this.servicio.add(artista);
@@ -53,7 +55,7 @@ public class ArtistaControlador {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public String delete(@PathVariable(value = "id") Long id) {
+	public String delete(@PathVariable(value = "id") Long id) throws Exception{
 
 		this.servicio.delete(id);
 
@@ -61,19 +63,19 @@ public class ArtistaControlador {
 	}
 
 	@GetMapping(value = "/editar/{id}")
-	public String editar(@PathVariable(value = "id") Long id,Model model) {
+	public String editar(@PathVariable(value = "id") Long id,Model model) throws Exception{
 		
-		Artista artista = this.servicio.getById(id);
-		model.addAttribute(artista);
+		model.addAttribute("editar", true);
+		model.addAttribute(this.servicio.getById(id));
 		
-		return "artista/artistaEditar";
+		return "artista/artista";
 	}
 	
 	@PostMapping(value = "/editar/{id}")
-	public String editar(@Valid Artista artista,BindingResult result, RedirectAttributes redirectAttributes) {
+	public String editar(@Valid Artista artista,BindingResult result, RedirectAttributes redirectAttributes) throws Exception{
 		
 		if (result.hasErrors()) {
-			return "artista/artistaEditar";
+			return "artista/artista";
 		}
 		
 		this.servicio.add(artista);

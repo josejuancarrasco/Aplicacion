@@ -21,7 +21,7 @@ import com.galeria.servicios.IClienteServicio;
 @Controller
 @RequestMapping("/cliente")
 public class ClienteControlador {
-	
+
 	private static Logger LOG = LoggerFactory.getLogger(GaleriaApplication.class);
 
 	@Autowired
@@ -29,7 +29,7 @@ public class ClienteControlador {
 
 	@GetMapping(value = "/list")
 	public String list(Model model) {
-		
+
 		LOG.info("Listando clientes");
 
 		model.addAttribute("clientes", this.servicio.getAll());
@@ -41,20 +41,24 @@ public class ClienteControlador {
 	public String add(Model model) {
 
 		Cliente cliente = new Cliente();
+		
+		model.addAttribute("editar", false);
 		model.addAttribute("cliente", cliente);
 
-		return "cliente/clienteNuevo";
+		return "cliente/cliente";
 	}
 
 	@PostMapping(value = "/add")
-	public String add(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String add(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes,
+			Model model) throws Exception {
 
 		if (result.hasErrors()) {
-			return "cliente/clienteNuevo";
+			return "cliente/cliente";
 		}
 
 		this.servicio.add(cliente);
-		
+
+
 		redirectAttributes.addFlashAttribute("mensaje", "Guardado correctamente").addFlashAttribute("clase", "success");
 
 		return "redirect:/cliente/list";
@@ -62,35 +66,36 @@ public class ClienteControlador {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public String delete(@PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes) {
+	public String delete(@PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes, Model model) throws Exception {
 
 		this.servicio.delete(id);
 
-		redirectAttributes.addFlashAttribute("mensaje", "Eliminado correctamente").addFlashAttribute("clase", "warning");
-		
+		redirectAttributes.addFlashAttribute("mensaje", "Eliminado correctamente").addFlashAttribute("clase","warning");
+
 		return "redirect:/cliente/list";
 	}
-	
+
 	@GetMapping(value = "/editar/{id}")
-	public String editar(@PathVariable(value = "id") Long id,Model model) {
-		
-		Cliente cliente = this.servicio.getById(id);
-		model.addAttribute(cliente);
-		
-		return "cliente/clienteEditar";
-	}
+	public String editar(@PathVariable(value = "id") Long id, Model model) throws Exception {
 	
+		model.addAttribute("editar", true);
+		model.addAttribute(this.servicio.getById(id));
+
+		return "cliente/cliente";
+	}
+
 	@PostMapping(value = "/editar/{id}")
-	public String editar(@Valid Cliente cliente,BindingResult result, RedirectAttributes redirectAttributes) {
-		
+	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes, Model model) throws Exception {
+
 		if (result.hasErrors()) {
-			return "cliente/clienteEditar";
+			return "cliente/cliente";
 		}
 		
-		this.servicio.add(cliente);
-		
-		redirectAttributes.addFlashAttribute("mensaje", "Modificado correctamente").addFlashAttribute("clase", "success");
-		
+		this.servicio.update(cliente);
+
+		redirectAttributes.addFlashAttribute("mensaje", "Modificado correctamente").addFlashAttribute("clase",
+				"success");
+
 		return "redirect:/cliente/list";
 	}
 

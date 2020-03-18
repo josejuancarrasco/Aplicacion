@@ -16,6 +16,8 @@
                         <tr>
                             <th>Titulo</th>
                             <th>Tipo</th>
+                            <th>Artista</th>
+                            <th>Imagen</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -24,13 +26,17 @@
                         <tr th:each="articulo : ${articulos}">
                             <td th:text="${articulo.titulo}"></td>
                             <td th:text="${articulo.tipo}"></td>
+                            <td th:text="${articulo.artista.nombre} + ' ' + ${articulo.artista.apellido_1} "></td>           
                             <td>
-                                <a class="btn btn-warning" th:href="@{/articulo/editar/} + ${articulo.id}" method="get">Editar <i
-                                        class="fa fa-edit"></i></a>
+                                <img  th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="42" width="42"/>
+                            </td>        
+                            <td>
+                                <a class="btn btn-warning" th:href="@{/articulo/editar/} + ${articulo.id}" method="get">Editar 
+                                    <i class="fa fa-edit"></i></a>
                             </td>
                             <td>
-                                <a class="btn btn-danger" th:href="@{/articulo/delete/} + ${articulo.id}" method="post">Eliminar <i
-                                        class="fa fa-trash"></i></a>
+                                <a class="btn btn-danger" th:href="@{/articulo/delete/} + ${articulo.id}" method="post">Eliminar 
+                                    <i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     </tbody>

@@ -1,5 +1,6 @@
 package com.galeria.entidades;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,7 +14,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Artista {
+public class Artista implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

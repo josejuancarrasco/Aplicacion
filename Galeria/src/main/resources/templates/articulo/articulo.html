@@ -5,13 +5,13 @@
 <body>
     <main layout:fragment="contenido">
         <div class="col-12">
-            <h2>Agregar Articulo</h2>
-
+            <h2 th:text="${editar} == true ? 'Editar Articulo' : 'Agregar Articulo'">  </h2>
             <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
                 th:text="${mensaje}" class="alert">
             </div>
 
-            <form th:object="${articulo}" th:action="@{/articulo/add}" method="post">
+            <form th:object="${articulo}" th:action="${editar} == true ? @{/articulo/editar/} + ${articulo.id} : @{/articulo/add}" 
+                    method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="titulo">Titulo del articulo</label>
@@ -32,9 +32,23 @@
                     <label for="artista">Artista</label>
 	                <select class="form-control" th:field="*{artista}">
                         <option th:each="artista : ${artistas}"
-                            th:value="${artista.id}" th:text="${artista.nombre}"></option>
+                            th:value="${artista.id}" th:text="${artista.nombre} + ' ' + ${artista.apellido_1}" ></option>
 		            </select>
                 </div>
+
+                <div class="form-group" >
+                    <label for="Imagen">Imagen</label>
+                    <div>
+                        <img  th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="200" width="200"/>
+                    </div>
+                </div>
+
+                <div class="form-group" >
+                    <div>
+                        <input path="file" name="file" type="file" accept="image/*">
+                    </div>
+                </div>
+
 
                 <button class="btn btn-success" type="submit">Guardar</button>
                 &nbsp;<a class="btn btn-danger" th:href="@{/articulo/list}">Cancelar</a>
@@ -43,4 +57,9 @@
     </div>
 </main>
 </body>
+<script>
+    $('.custom-file-input').on('change',function(){
+        $(this).next('.form-control-file').addClass("selected").html($(this).val());
+    })
+</script>
 </html>

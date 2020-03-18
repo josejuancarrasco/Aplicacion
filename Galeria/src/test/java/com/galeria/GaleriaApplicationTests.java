@@ -16,9 +16,9 @@ import com.galeria.controladores.ArtistaControlador;
 import com.galeria.controladores.ClienteControlador;
 import com.galeria.entidades.Artista;
 import com.galeria.entidades.Usuario;
-import com.galeria.repositorios.ArticuloRepositorio;
-import com.galeria.repositorios.ArtistaRepositorio;
-import com.galeria.repositorios.UsuarioRepositorio;
+import com.galeria.repositorios.IArticuloRepositorio;
+import com.galeria.repositorios.IArtistaRepositorio;
+import com.galeria.repositorios.IUsuarioRepositorio;
 
 @SuppressWarnings("unused")
 @SpringBootTest
@@ -34,7 +34,7 @@ class GaleriaApplicationTests {
 	private ArticuloControlador articuloControlador;
 
 	@Autowired
-	private UsuarioRepositorio usuarioRepo;
+	private IUsuarioRepositorio usuarioRepo;
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
