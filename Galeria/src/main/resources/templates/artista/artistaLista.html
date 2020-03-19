@@ -9,7 +9,9 @@
             <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
                 th:text="${mensaje}" class="alert">
             </div>
+            
             <a class="btn btn-success mb-2" th:href="@{/artista/add}" method="get">Agregar</a>
+
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -17,15 +19,22 @@
                             <th>Nombre</th>
                             <th>Primer Apellido</th>
                             <th>Segundo Apellido</th>
+                            <th>Detalles</th>                            
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla">
                         <tr th:each="artista : ${artistas}">
                             <td th:text="${artista.nombre}"></td>
                             <td th:text="${artista.apellido_1}"></td>
                             <td th:text="${artista.apellido_2}"></td>
+                            <td>
+                                <a class="btn btn-primary" th:href="@{/artista/{id}/articuloList(id=${artista.id})}" 
+                                method="get">Articulos <i class="fa fa-list"></i></a>
+                
+                    
+                            </td>
                             <td>
                                 <a class="btn btn-warning" th:href="@{/artista/editar/} + ${artista.id}" method="get">Editar <i
                                         class="fa fa-edit"></i></a>
@@ -41,5 +50,4 @@
         </div>
     </main>
 </body>
-
 </html>

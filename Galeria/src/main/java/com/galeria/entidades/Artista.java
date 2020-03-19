@@ -42,7 +42,7 @@ public class Artista implements Serializable {
 	private LocalDate fecha_fall;
 
 	@Valid
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artista")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artista")
 	List<Articulo> articulos;
 
 	public Artista() {
@@ -52,7 +52,10 @@ public class Artista implements Serializable {
 		return id;
 	}
 
-
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

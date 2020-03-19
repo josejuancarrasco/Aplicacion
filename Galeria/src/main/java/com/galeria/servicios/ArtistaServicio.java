@@ -33,9 +33,11 @@ public class ArtistaServicio implements IArtistaServicio {
 	}
 
 	@Override
-	public void update(Artista artist) {
+	public Artista update(Artista artista) {
+		
+		this.repositorio.getOne(artista.getId());
 
-		this.repositorio.save(artist);
+		return this.repositorio.save(artista);
 
 	}
 

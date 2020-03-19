@@ -35,26 +35,26 @@
                             th:value="${artista.id}" th:text="${artista.nombre} + ' ' + ${artista.apellido_1}" ></option>
 		            </select>
                 </div>
-
-                <div class="form-group" >
+                <input type="hidden" th:field="*{foto64}">
+                <div class="form-group">
                     <label for="Imagen">Imagen</label>
                     <div>
-                        <img  th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="200" width="200"/>
+                        <img th:field="*{foto64}" th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="200" width="200"/>
                     </div>
                 </div>
 
                 <div class="form-group" >
                     <div>
-                        <input path="file" name="file" type="file" accept="image/*">
+                        <input name="file" type="file" accept="image/*">
                     </div>
                 </div>
 
-
-                <button class="btn btn-success" type="submit">Guardar</button>
+                <button class="btn btn-success" name = "guardar" type="submit">Guardar</button>
                 &nbsp;<a class="btn btn-danger" th:href="@{/articulo/list}">Cancelar</a>
 
             </form>
-    </div>
+
+        </div>
 </main>
 </body>
 <script>

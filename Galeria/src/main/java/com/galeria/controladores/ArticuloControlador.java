@@ -1,6 +1,5 @@
 package com.galeria.controladores;
 
-
 import java.util.Base64;
 
 import javax.validation.Valid;
@@ -22,8 +21,6 @@ import com.galeria.GaleriaApplication;
 import com.galeria.entidades.Articulo;
 import com.galeria.servicios.IArticuloServicio;
 import com.galeria.servicios.IArtistaServicio;
-
-
 
 
 @Controller()
@@ -65,8 +62,6 @@ public class ArticuloControlador {
 		LOG.info("Guardando Articulo");
 		
 		if (result.hasErrors()) {
-			
-			LOG.info(result.toString());
 		
 			model.addAttribute("artistas", this.servicioArtista.getAll());
 			
@@ -74,10 +69,6 @@ public class ArticuloControlador {
 		}
 		
 		articulo.setFoto64(Base64.getEncoder().encodeToString(file.getBytes()));
-		
-		LOG.info(file.getContentType());
-		LOG.info(file.getOriginalFilename());
-		LOG.info(file.getBytes().toString());
 		
 		this.servicioArticulo.add(articulo);
 
@@ -106,10 +97,18 @@ public class ArticuloControlador {
 	}
 	
 	@PostMapping(value = "/editar/{id}")
-	public String editar(@Valid Articulo articulo,BindingResult result, RedirectAttributes redirectAttributes) throws Exception {
+	public String editar(@Valid Articulo articulo,BindingResult result, RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
 		
 		if (result.hasErrors()) {
 			return "articulo/articulo";
+		}
+		
+		LOG.info("El fichero esta vacio" + file.isEmpty());
+		LOG.info("El nombre del fichero es:" + file.getName());
+		LOG.info("El contenido del fichero es:" + file.getContentType());
+		
+		if (!file.isEmpty()) {
+			articulo.setFoto64(Base64.getEncoder().encodeToString(file.getBytes()));
 		}
 		
 		this.servicioArticulo.update(articulo);

@@ -18,6 +18,7 @@ import com.galeria.GaleriaApplication;
 import com.galeria.entidades.Cliente;
 import com.galeria.servicios.IClienteServicio;
 
+
 @Controller
 @RequestMapping("/cliente")
 public class ClienteControlador {
@@ -87,6 +88,7 @@ public class ClienteControlador {
 	@PostMapping(value = "/editar/{id}")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes, Model model) throws Exception {
 
+		
 		if (result.hasErrors()) {
 			return "cliente/cliente";
 		}

@@ -46,10 +46,13 @@ public class ClienteServicio implements IClienteServicio {
 	}
 
 	@Override
-	public Cliente update(Cliente cliente){
+	public Cliente update(Cliente cliente) throws Exception{
 		
-	 return this.repositorio.save(cliente);
-
+		//Trae una instancia de la clase al contexto para poder actualizarla.
+		this.repositorio.getOne(cliente.getId());
+		
+		return this.repositorio.save(cliente);
+		
 	}
 
 	@Override

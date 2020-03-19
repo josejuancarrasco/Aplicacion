@@ -12,7 +12,7 @@ public interface IArtistaServicio {
 
 	Artista add(Artista artista) throws Exception;
 
-	void update(Artista artist) throws Exception;
+	Artista update(Artista artist) throws Exception;
 
 	void delete(Long id) throws Exception;
 

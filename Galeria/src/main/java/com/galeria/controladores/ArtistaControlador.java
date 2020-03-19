@@ -20,12 +20,13 @@ import com.galeria.servicios.IArtistaServicio;
 public class ArtistaControlador {
 
 	@Autowired
-	private IArtistaServicio servicio;
+	private IArtistaServicio artistaServicio;
+	
 
 	@GetMapping(value = "/list")
 	public String list(Model model) {
 
-		model.addAttribute("artistas", this.servicio.getAll());
+		model.addAttribute("artistas", this.artistaServicio.getAll());
 
 		return "artista/artistaLista";
 	}
@@ -48,16 +49,25 @@ public class ArtistaControlador {
 			return "artista/artista";
 		}
 
-		this.servicio.add(artista);
+		this.artistaServicio.add(artista);
 
 		return "redirect:/artista/list";
 
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public String delete(@PathVariable(value = "id") Long id) throws Exception{
+	public String delete(@PathVariable(value = "id") Long id, RedirectAttributes redirectAttributes)  {
 
-		this.servicio.delete(id);
+		try {
+			
+			this.artistaServicio.delete(id);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("mensaje", "No se puede borrar este artista, tiene articulos a su nombre.").addFlashAttribute("clase", "danger");
+			
+		}
 
 		return "redirect:/artista/list";
 	}
@@ -66,7 +76,7 @@ public class ArtistaControlador {
 	public String editar(@PathVariable(value = "id") Long id,Model model) throws Exception{
 		
 		model.addAttribute("editar", true);
-		model.addAttribute(this.servicio.getById(id));
+		model.addAttribute(this.artistaServicio.getById(id));
 		
 		return "artista/artista";
 	}
@@ -78,10 +88,18 @@ public class ArtistaControlador {
 			return "artista/artista";
 		}
 		
-		this.servicio.add(artista);
+		this.artistaServicio.update(artista);
 		
 		redirectAttributes.addFlashAttribute("mensaje", "Modificado correctamente").addFlashAttribute("clase", "success");
 		
 		return "redirect:/artista/list";
+	}
+	
+	@GetMapping(value="/{id}/articuloList")
+	public String articulosArtista(@PathVariable(value = "id")Long id,Model model) throws Exception {
+		
+		model.addAttribute("articulos", this.artistaServicio.getById(id).getArticulos());
+		
+		return "articulo/articuloLista";
 	}
 }

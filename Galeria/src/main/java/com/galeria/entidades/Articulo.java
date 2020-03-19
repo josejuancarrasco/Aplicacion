@@ -2,7 +2,6 @@ package com.galeria.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-
 import javax.validation.constraints.NotBlank;
 
 
@@ -60,22 +58,22 @@ public class Articulo implements Serializable{
 	//@NotBlank(message = "El precio es obligatorio")
 	private Float precio;
 
-	@Basic(fetch = FetchType.EAGER)
-	@Lob
-	private byte[] imagen;
-	
 	@Lob
 	private String foto64;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_artista", nullable = false)
 	private Artista artista;
-
+	
 	public Articulo() {
 	}
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -166,13 +164,6 @@ public class Articulo implements Serializable{
 		this.precio = precio;
 	}
 
-	public byte[] getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
-	}
 
 	public Artista getArtista() {
 		return artista;

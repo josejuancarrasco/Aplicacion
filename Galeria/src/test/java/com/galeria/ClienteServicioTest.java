@@ -42,8 +42,12 @@ public class ClienteServicioTest {
 	public void buscarPorId() throws Exception {
 
 		this.clienteServicio.add(cliente);
+		
+		cliente = this.clienteServicio.getById(cliente.getId());
 
 		assertThat(this.clienteServicio.getById(cliente.getId())).isNotNull();
+		assertThat( this.clienteServicio.getById(cliente.getId()).getNombre()).isEqualTo("Jose Juan"); 
+		
 
 	}
 

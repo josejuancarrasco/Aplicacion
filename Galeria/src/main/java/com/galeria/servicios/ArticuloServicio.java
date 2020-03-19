@@ -1,5 +1,6 @@
 package com.galeria.servicios;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class ArticuloServicio implements IArticuloServicio {
 	@Override
 	public Articulo update(Articulo articulo) {
 
+		this.repositorio.getOne(articulo.getId());
+		
+		
 		return this.repositorio.save(articulo);
 
 	}
