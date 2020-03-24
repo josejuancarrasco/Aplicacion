@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="index">
+
+<body>
+    <main layout:fragment="contenido">
+        <div class="row justify-content-md-center">
+            <div class="col-10">
+				<div class="row justify-content-md-center">
+					<h2>Articulos</h2>
+				</div>
+				<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+						th:text="${mensaje}" class="alert justify-content-md-center">
+				</div>
+				<a class="btn btn-success mb-2" th:href="@{/articulo/add}" method="get">Agregar</a>
+				<div class="row ">
+					<div th:each="articulo : ${articulos}">
+						<div class="col-lg-4 col-md-12 mb-4">
+							<div class="card" style="width: 18rem;">
+								<img th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" class="card-img-top">
+								<div class="card-body">
+									<h5 class="card-title" th:text="${articulo.titulo}"></h5>
+									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									<a th:href="@{/articulo/editar/} + ${articulo.id}" class="btn btn-primary">Editar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </main>
+</body>
+
+</html>

@@ -17,7 +17,6 @@ public class GaleriaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		LOG.info("Hola");
 	}
 

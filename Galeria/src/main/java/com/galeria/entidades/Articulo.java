@@ -1,6 +1,7 @@
 package com.galeria.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,10 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 
-import com.galeria.enumeraciones.EstadoArticulo;
+import com.galeria.enumeraciones.TipoTransaccion;
 import com.galeria.enumeraciones.TipoArticulo;
 
 @Entity
@@ -25,7 +27,6 @@ public class Articulo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,13 +51,8 @@ public class Articulo implements Serializable{
 
 	private String pisada;
 
-	private String comentarios;
-
 	@Enumerated(value = EnumType.STRING)
-	private EstadoArticulo estado;
-
-	//@NotBlank(message = "El precio es obligatorio")
-	private Float precio;
+	private TipoTransaccion estado;
 
 	@Lob
 	private String foto64;
@@ -64,6 +60,9 @@ public class Articulo implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_artista", nullable = false)
 	private Artista artista;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "articulo")
+	private List<Transaccion> transacciones;
 	
 	public Articulo() {
 	}
@@ -140,28 +139,13 @@ public class Articulo implements Serializable{
 		this.pisada = pisada;
 	}
 
-	public String getComentarios() {
-		return comentarios;
-	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
-	}
-
-	public EstadoArticulo getEstado() {
+	public TipoTransaccion getEstado() {
 		return estado;
 	}
 
-	public void setEstado(EstadoArticulo estado) {
+	public void setEstado(TipoTransaccion estado) {
 		this.estado = estado;
-	}
-
-	public Float getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(Float precio) {
-		this.precio = precio;
 	}
 
 
