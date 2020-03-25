@@ -29,7 +29,7 @@ public class Articulo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank(message = "El título es obligatorio")
@@ -163,6 +163,14 @@ public class Articulo implements Serializable{
 
 	public void setFoto64(String foto64) {
 		this.foto64 = foto64;
+	}
+
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
 	}
 
 

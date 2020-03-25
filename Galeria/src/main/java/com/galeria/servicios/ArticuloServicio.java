@@ -4,6 +4,8 @@ package com.galeria.servicios;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.galeria.entidades.Articulo;
@@ -18,7 +20,8 @@ public class ArticuloServicio implements IArticuloServicio {
 	@Override
 	public List<Articulo> getAll() {
 
-		return (List<Articulo>) this.repositorio.findAll();
+		return (List<Articulo>) this.repositorio.findAll(Sort.by(Direction.DESC, "id"));
+		
 	}
 
 	@Override

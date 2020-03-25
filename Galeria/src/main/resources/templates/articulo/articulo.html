@@ -17,8 +17,17 @@
 				
 	            <form  th:object="${articulo}" th:action="${editar} == true ? @{/articulo/editar/} + ${articulo.id} : @{/articulo/add}" 
 	                    method="post" enctype="multipart/form-data">
+	                    
+	               	<input type="hidden" th:field="*{foto64}">
 					
-			
+	                <div class="form-group row justify-content-center" th:if="*{foto64} != null">
+	                    <div class="col-sm-6">
+	                        <img id="Imagen" class="img-thumbnail" th:value="*{foto64}" th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" 
+	                        	height="400" width="400"/>
+	                    </div>
+	                    
+	                </div>
+							
 	                <div class="form-group row">
 	                	
 	                	<div class="col-md-5">
@@ -89,38 +98,21 @@
  
 					</div>
 		
-		            <input type="hidden" th:field="*{foto64}">
-					
-	                <div class="form-group row" th:if="*{foto64} != null">
-	                    
-	                    <div class="col-sm-6">
-	                    	
-	                    	<div>
-	                        	<img id="Imagen" class="img-thumbnail" th:value="*{foto64}" th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="200" width="200"/>
-	                    	</div>
-	                    	<label for="Imagen">Imagen</label>
-	                    </div>
-	                    
-	                </div>
-
 	                <div class="form-group row" >
-	                    <div class="col">
-	                        <input name="file" type="file" accept="image/*">
+	                    <div class="custom-file col">
+	                        <input  name="file" type="file" accept="image/*">
 	                    </div>
-	                </div>
+	                </div>	               
 						
 					<div class="form-group row">
+						<div class="col">
 			                <button class="btn btn-success" name = "guardar" type="submit">Guardar</button>
 			                &nbsp;<a class="btn btn-danger" th:href="@{/articulo/list}">Cancelar</a>
+			            </div>
 					</div>
 	            </form>
 	    	</div>
 	    </div>
 </main>
 </body>
-<script>
-    $('.custom-file-input').on('change',function(){
-        $(this).next('.form-control-file').addClass("selected").html($(this).val());
-    })
-</script>
 </html>

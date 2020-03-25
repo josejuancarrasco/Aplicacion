@@ -18,6 +18,7 @@
                             <th>Tipo</th>
                             <th>Artista</th>
                             <th>Imagen</th>
+                            <th>Transacciones</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -29,7 +30,23 @@
                             <td th:text="${articulo.artista.nombre} + ' ' + ${articulo.artista.apellido_1} "></td>           
                             <td>
                                 <img  th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="42" width="42"/>
-                            </td>        
+                            </td> 
+                            <td>                    
+                                    
+                             <div class="btn-group">
+								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    Transacciones 
+								  </button>
+								  <div class="dropdown-menu">
+								  
+								    <a class="dropdown-item"  th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Compra}" th:method="get">Compra</a>
+								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Ofrecimiento}">Ofrecimiento</a>
+								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Venta}">Venta</a>
+								    <div class="dropdown-divider"></div>
+								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/list( id = ${articulo.id} )}">Listar</a>
+								  </div>
+								</div>
+                            </td>       
                             <td>
                                 <a class="btn btn-warning" th:href="@{/articulo/editar/} + ${articulo.id}" th:method="get">Editar 
                                     <i class="fa fa-edit"></i></a>

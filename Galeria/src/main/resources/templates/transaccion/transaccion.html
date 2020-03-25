@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="index">
+
+<body>
+    <main layout:fragment="contenido">
+        <div class="row">
+        	<div class="col">
+        	
+	        	<div class="row justify-content-center">
+	        	
+		            <h2 th:text="${editar} == true ? 'Editar Cliente' : 'Agregar Cliente'">  </h2>
+		        
+		            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+		                th:text="${mensaje}" class="alert">
+		           	</div>
+		        
+		        </div>    
+		        
+	            <form th:object="${transaccion}" th:action="${editar} == true ? @{/transaccion/editar/} + ${transaccion.id} : @{/transaccion/add}"  method="post">
+	               
+	                <div class="form-group row">>
+	                	
+	                	<div class="col-md-3">
+			               	<label  for="tipoTransccion">Precio</label>
+
+			            </div>
+	                
+	                </div>
+					
+	
+	                <button class="btn btn-success" type="submit">Guardar</button>
+	                &nbsp;<a class="btn btn-warning" th:href="@{/transacion/list}">Ver todos</a>
+	            
+	            </form>
+	            
+	         </div>
+        </div>
+</main>
+</body>
+</html>

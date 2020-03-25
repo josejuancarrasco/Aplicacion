@@ -31,16 +31,14 @@
                             <td th:text="${artista.apellido_2}"></td>
                             <td>
                                 <a class="btn btn-primary" th:href="@{/artista/{id}/articuloList(id=${artista.id})}" 
-                                method="get">Articulos <i class="fa fa-list"></i></a>
-                
-                    
+                                th:method="get">Articulos <i class="fa fa-list"></i></a>                
                             </td>
                             <td>
-                                <a class="btn btn-warning" th:href="@{/artista/editar/} + ${artista.id}" method="get">Editar <i
+                                <a class="btn btn-warning" th:href="@{/artista/editar/} + ${artista.id}" th:method="get">Editar <i
                                         class="fa fa-edit"></i></a>
                             </td>
                             <td>
-                                <a class="btn btn-danger" th:href="@{/artista/delete/} + ${artista.id}" method="post">Eliminar <i
+                                <a class="btn btn-danger" th:href="@{/artista/delete/} + ${artista.id}" th:method="post">Eliminar <i
                                         class="fa fa-trash"></i></a>
                             </td>
                         </tr>
