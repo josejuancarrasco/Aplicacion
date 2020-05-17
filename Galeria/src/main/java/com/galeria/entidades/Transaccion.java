@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.galeria.enumeraciones.TipoTransaccion;
 
 @Entity
@@ -38,6 +39,7 @@ public class Transaccion implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_articulo", nullable = false)
+	@JsonIgnore
 	private Articulo articulo;
 	
 	public Transaccion() {

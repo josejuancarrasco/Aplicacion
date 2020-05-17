@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="index">
+
+<body>
+    <main layout:fragment="contenido">
+      
+        <div class="row">
+            <div class="col-md-6">
+	            <div>
+	             	<img class="img-fluid rounded mx-auto d-block text-nowrap" th:src="@{'data:image/jpeg;base64,'+${articulo.foto64}}" height="550" width="550"/>
+	            </div>
+            </div>
+            
+            <div class="col-md-6">
+            	
+            	 	<h1  th:text="${articulo.titulo}" ></h1>
+            	 	<h3  th:text="${articulo.artista.nombre} + ' ' + ${articulo.artista.apellido_1}"></h3>
+            	 	
+            	 	<div class="pt-4">
+	            	 	<label>Disciplina:</label>
+	            	 	<a th:text="${articulo.tipo}"></a>
+	            	 </div>	
+	            	 	<label>Medidas:</label>
+	            	 	<a th:text="${articulo.medidas}"></a>
+	            	<div>
+	            	    <label>Pisada:</label>
+	            	 	<a th:text="${articulo.pisada}"></a>
+	           		</div>
+	           		 	<label>Numeracion:</label>
+	            	 	<a th:text="${articulo.numeracion}"></a>
+	            	<div>	
+	            	 	<label>Firmado:</label>
+	            	 	<a th:text="${articulo.firmado == true ? 'Si' : 'No'}"></a>
+	            	</div> 	 
+	            	<div>
+	            	 	<label>Editor:</label>
+	            	 	<a th:text="${articulo.editor}"></a>
+	            	</div>
+	            	<div class="pt-2">
+	            	 	<label>Descripcion:</label>
+	            	 	<p th:text="${articulo.descripcion}"></p>
+	            	</div>
+            </div>
+           
+		</div>	
+		
+		<div class="row pt-2">
+		
+		
+		
+		</div>
+		
+		<div class="row pt-4">
+		
+			<div class="col">
+	           <h2 class="row justify-content-md-center" th:text="Transacciones"></h2>
+			
+			   <div class="table-responsive">
+	                <table class="table table-bordered">
+	                    <thead>
+	                        <tr>
+	                            <th>Tipo</th>
+	                            <th>Precio</th>
+	                            <th>Eliminar</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr th:each="transaccion : ${articulo.transacciones}">
+	                            <td th:text="${transaccion.tipoTransaccion}"></td>
+	                            <td th:text="${transaccion.precio}"></td> 
+	                            <td>
+	                                <a class="btn btn-danger" th:href="@{/transaccion/delete/} + ${transaccion.id}" th:method="get">Eliminar 
+	                                    <i class="fa fa-trash"></i></a>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+	            </div>    
+             </div>
+		</div>
+			
+		<div class="row pt-4">
+			  
+			  <div class="col mx-auto">
+	        	
+	        	<div class="row justify-content-center">
+	            	<h2>Nueva Transaccion</h2>
+	            	<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+	                th:text="${mensaje}" class="alert">
+	           	</div>
+  				</div>     
+		        
+	            <form th:object="${transaccion}" th:action="@{/transaccion/add}"  method="post">
+	               
+	                <div class="form-group row">
+
+						<div class="col-md-3">	 
+							<label for="tipoTransaccion">Tipo</label>
+						  	<select class="form-control" th:field="*{tipoTransaccion}">
+		                        <option  th:value="${ T(com.galeria.enumeraciones.TipoTransaccion).Compra}" th:text="${ T(com.galeria.enumeraciones.TipoTransaccion).Compra}" ></option>
+		                        <option  th:value="${ T(com.galeria.enumeraciones.TipoTransaccion).Ofrecimiento}" th:text="${ T(com.galeria.enumeraciones.TipoTransaccion).Ofrecimiento}" ></option>
+		                        <option th:if="${enPropiedad} == true"  th:value="${ T(com.galeria.enumeraciones.TipoTransaccion).Venta}" th:text="${ T(com.galeria.enumeraciones.TipoTransaccion).Venta}" ></option>				            
+				            </select>		
+						</div>
+						
+						<div class="col-md-3">	 
+							<label for="precio">Precio</label>
+						  	<input type="number" class="form-control" id="precio" th:field="*{precio}">		
+						</div>
+						
+<!-- 						<div class="col-md-3">	  -->
+<!-- 							<label for="fechaTransaccion">Fecha</label> -->
+<!-- 						  	<input type="date" class="form-control" id="fechaTransaccion" th:field="*{fechaTransaccion}">		 -->
+<!-- 						</div> -->
+						
+						<input  th:field="*{articulo}" type="hidden"> 
+	                
+	                </div>
+					<div>
+		                <button class="btn btn-success" type="submit">Guardar</button>
+	            	</div>
+	            </form>
+			</div>
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-md-4">
+			
+			</div>
+			<div class="col-md-4">
+			
+			</div>
+			<div class="col-md-4">
+			
+			</div>
+		
+		</div>
+		
+		
+    </main>
+</body>
+
+</html>

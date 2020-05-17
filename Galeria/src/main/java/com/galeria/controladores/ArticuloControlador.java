@@ -20,10 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.galeria.GaleriaApplication;
 import com.galeria.entidades.Articulo;
 import com.galeria.entidades.Transaccion;
-import com.galeria.enumeraciones.TipoTransaccion;
 import com.galeria.servicios.IArticuloServicio;
 import com.galeria.servicios.IArtistaServicio;
-import com.galeria.servicios.ITransaccionServicio;
 
 
 @Controller()
@@ -39,15 +37,12 @@ public class ArticuloControlador {
 	@Autowired
 	private IArtistaServicio servicioArtista;
 
-	@Autowired
-	private ITransaccionServicio servicioTransaccion;
-
 	@GetMapping(value = "/list")
 	public String list(Model model) {
 
-		model.addAttribute("articulos", this.servicioArticulo.getAll());
+	//	model.addAttribute("articulos", this.servicioArticulo.getAll());
 
-		return "articulo/articuloLista";
+		return "articulo/articuloDataTable";
 	}
 
 	@GetMapping(value = "/add")
@@ -127,6 +122,19 @@ public class ArticuloControlador {
 		return "redirect:/articulo/list";
 	}
 
+	@GetMapping(value = "/{id}/detalle")
+	public String getDetalles(@PathVariable(value= "id" ) Long id, Model model) throws Exception {
+		
+		Transaccion transaccion = new Transaccion();
+		
+		transaccion.setArticulo(this.servicioArticulo.getById(id));
+		
+		model.addAttribute("articulo", this.servicioArticulo.getById(id));
+		model.addAttribute("transaccion", transaccion);
+		
+		return "articulo/articuloDetalle";
+	}
+	
 	@GetMapping(value = "/{id}/transaccion/list")
 	public String listarTransccion(@PathVariable(value = "id") Long id, Model model) throws Exception {
 
@@ -135,18 +143,5 @@ public class ArticuloControlador {
 		return "transaccion/transaccionList";
 	}
 
-	@GetMapping(value = "/{id}/transaccion/{tipoTransaccion}")
-	public String addTransaccion(@PathVariable(value = "id") Long id,
-			@PathVariable(value = "tipoTransaccion") TipoTransaccion tipoTransaccion, Model model) throws Exception {
-
-		Transaccion transaccion = new Transaccion();
-		
-		transaccion.setTipoTransaccion(tipoTransaccion);
-		transaccion.setArticulo(this.servicioArticulo.getById(id));
-		
-		model.addAttribute("transaccion", transaccion);
-
-		return "transaccion/transaccion";
-	}
 
 }

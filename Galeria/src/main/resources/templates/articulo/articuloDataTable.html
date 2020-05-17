@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="index">
+
+<body>
+
+    <main layout:fragment="contenido">
+         	<div class="col-12 ">
+         	
+	         	<div class="row-12">
+			            <h2>Articulos</h2>
+			            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+			                th:text="${mensaje}" class="alert">
+			            </div>
+			     </div>
+			     
+			     <div class= "row-12 justify-content-md-center pt-4">       
+		            <a class="btn btn-success mb-2" th:href="@{/articulo/add}" th:method="get">Agregar</a>
+		         </div>   
+	         
+		         <div class ="row-12 justify-content-md-center pt-4">
+	                <table id="tablaArticulo" class="table table-striped table-bordered" style= "width : 100%" >
+	                    <thead>
+	                        <tr>
+	                            <th>Titulo</th>
+	                            <th>Tipo</th>
+	                            <th>Firmado</th>
+	                            <th>Numeracion</th>
+	                            <th>Medidas</th>
+	                            <th>Pisada</th>
+	                            <th>Imagen</th>
+	                            <th>Acciones</th> 
+	                        </tr>
+	                    </thead>
+	                    <tfoot>
+	                        <tr>
+	                            <th>Titulo</th>
+	                            <th>Tipo</th>
+	                            <th>Firmado</th>
+	                            <th>Numeracion</th>
+	                            <th>Medidas</th>
+	                            <th>Pisada</th>
+	                            <th>Imagen</th>
+	                            <th>Acciones</th> 
+	                        </tr>
+	                    </tfoot>
+	                </table>
+				</div>
+	         </div>    	
+	         
+	         
+	       	<!-- Modal Eliminar-->
+			<div class="modal fade" id="modalEliminar"  role="dialog" tabindex="-1" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" >Eliminar articulo</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>¿Seguro que quieres eliminar este registro?</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			        <button type="button" id="confirmarEliminar" data-dismiss="modal" class="btn btn-danger">Eliminar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+				         
+	        <script >    	
+	        $(document).ready(function() {
+	        	
+	        	var tablaArticulo =	$('#tablaArticulo').DataTable({
+
+	        							ajax: {
+					        	            url: "/rest/articulo",
+					        	            method:"GET",
+					        	            dataSrc: ""
+					        	        },
+						        		responsive: true,
+					                     columns: [
+					                         { data: "titulo" },
+					                         { data: "tipo" },
+					                         { 
+					                        	 data: "firmado",
+					                        	 render: function( data, type, row ){
+					                        		return (data === true ) ? 'Si' : 'No'; 
+					                        	 }
+					                         },
+					                         { data: "numeracion" },
+					                         { data: "medidas" },
+					                         { data: "pisada" },
+					                         {
+					                        	data:"foto64",
+					                        	render: function( data, type, row){
+					                        		return '<img src="data:image/jpeg;base64,'+data+'" height="42" width="42"/>';
+					                        	}
+					                         },
+					                         {
+					                             sortable: false,
+					                             render: function ( data, type, row, meta ) {
+					                                 return '<button type="button" class="btn-xs btn-info botonDetalles">Detalles</button> <button type="button" class="btn-xs btn-warning botonEditar"><i class="fa fa-edit"></i></button> <button type="button" class="btn-xs btn-danger botonEliminar" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash"></i></button>';
+						                          }
+						                     },
+					                         
+					                     ],
+					                     language : {
+					                         url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+					                     },					               
+					                     dom: '<"top"B><flt><"bottom"ip>',
+					                     buttons: [ 
+					                    	 			'csv','excel', 'pdf', 
+					                    	 		{
+					                    	 			extend: 'colvis',
+					                    	 			text: 'Columnas visibles'
+					                    	 		}
+
+					                    	 	  ]	                  
+					                 });
+
+	        	
+	        	//Recuperar el id 
+	           	var articuloId;
+	        	
+				//Editar
+				 
+				 $('#tablaArticulo tbody').on('click', 'button.botonEditar', function() {
+	  	   				articuloId = tablaArticulo.row($(this).parents('tr')).data().id;	
+	  	   				location.href = "/articulo/editar/" + articuloId;
+		         	} );
+				
+		       	//Eliminar
+		       	
+		    	$('#tablaArticulo tbody').on('click', 'button.botonEliminar', function() {
+		    		articuloId = tablaArticulo.row($(this).parents('tr')).data().id;	
+       			} );
+		       	
+		       	$('#confirmarEliminar').click(function() {	              
+		       		$.ajax({
+	                   method: "DELETE",
+	                   url: '/rest/articulo/' + articuloId,
+	                   contentType: "application/json",
+	                   success: function () {
+	                	   tablaArticulo.ajax.reload();
+	                   },
+	                   error: function () {
+	                      alert('Error inesperado ');
+	                   }
+	               });
+	               
+		       	} );       
+		       	
+		       	//Ver los detalles del articulo
+		    	$('#tablaArticulo tbody').on('click', 'button.botonDetalles', function() {
+		    		articuloId = tablaArticulo.row($(this).parents('tr')).data().id;	
+		    		location.href = '/articulo/'+articuloId+'/detalle';
+       			} );
+		       
+
+	        } );
+	    	</script> 
+
+    </main>
+     
+</body>
+
+</html>

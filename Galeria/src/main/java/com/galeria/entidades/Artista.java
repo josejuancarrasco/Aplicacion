@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
 @Entity
 public class Artista implements Serializable {
 
@@ -43,6 +47,7 @@ public class Artista implements Serializable {
 
 	@Valid
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artista")
+	@JsonIgnore
 	List<Articulo> articulos;
 
 	public Artista() {

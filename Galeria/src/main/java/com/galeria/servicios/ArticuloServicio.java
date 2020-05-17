@@ -34,6 +34,8 @@ public class ArticuloServicio implements IArticuloServicio {
 	@Override
 	public  Articulo add(Articulo articulo) {
 
+		articulo.setEnPropiedad(false);
+		
 		return this.repositorio.save(articulo);
 
 	}

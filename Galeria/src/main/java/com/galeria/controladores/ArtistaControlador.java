@@ -26,9 +26,9 @@ public class ArtistaControlador {
 	@GetMapping(value = "/list")
 	public String list(Model model) {
 
-		model.addAttribute("artistas", this.artistaServicio.getAll());
+		//model.addAttribute("artistas", this.artistaServicio.getAll());
 
-		return "artista/artistaLista";
+		return "artista/artistaDataTable";
 	}
 
 	@GetMapping(value = "/add")
@@ -100,6 +100,6 @@ public class ArtistaControlador {
 		
 		model.addAttribute("articulos", this.artistaServicio.getById(id).getArticulos());
 		
-		return "articulo/articuloLista";
+		return "articulo/articuloGaleria";
 	}
 }

@@ -4,8 +4,7 @@
 
 <body>
     <main layout:fragment="contenido">
-         <div class="row justify-content-md-center">
-         	<div class="col-12">
+         <div class="col-12 justify-content-md-center">
          	
 	            <h2>Clientes</h2>
 	            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
@@ -14,36 +13,36 @@
 	            
 	            <a class="btn btn-success mb-2" th:href="@{/cliente/add}" th:method="get">Agregar</a>
 	            
-	            <div class="table-responsive">
-	                <table class="table table-bordered">
-	                    <thead>
-	                        <tr>
-	                            <th>Nombre</th>
-	                            <th>Primer Apellido</th>
-	                            <th>Segundo Apellido</th>
-	                            <th>Editar</th>
-	                            <th>Eliminar</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                        <tr th:each="cliente : ${clientes}">
-	                            <td th:text="${cliente.nombre}"></td>
-	                            <td th:text="${cliente.apellido_1}"></td>
-	                            <td th:text="${cliente.apellido_2}"></td>
-	                            <td>
-	                                <a class="btn btn-warning" th:href="@{/cliente/editar/} + ${cliente.id}" th:method="get">Editar <i
-	                                        class="fa fa-edit"></i></a>
-	                            </td>
-	                            <td>
-	                                <a class="btn btn-danger" th:href="@{/cliente/delete/} + ${cliente.id}" th:method="post">Eliminar <i
-	                                        class="fa fa-trash"></i></a>
-	                            </td>
-	                        </tr>
-	                    </tbody>
-	                </table>
-	            </div>
-	          </div>
-        </div>
+                <table id="tablaCliente" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Primer Apellido</th>
+                            <th>Segundo Apellido</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <td th:text="${cliente.nombre}"></td>
+                            <td th:text="${cliente.apellido_1}"></td>
+                            <td th:text="${cliente.apellido_2}"></td>
+                            <td>
+                                <a class="btn btn-warning" th:href="@{/cliente/editar/} + ${cliente.id}" th:method="get">Editar <i
+                                        class="fa fa-edit"></i></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" th:href="@{/cliente/borrar/} + ${cliente.id}" th:method="delete">Eliminar <i
+                                        class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+		</div>
+		<script>
+			var tablaCliente =	$('#tablaCliente').DataTable();
+		</script>
     </main>
 </body>
 

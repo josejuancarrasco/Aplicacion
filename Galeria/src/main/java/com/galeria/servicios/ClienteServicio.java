@@ -56,7 +56,7 @@ public class ClienteServicio implements IClienteServicio {
 	}
 
 	@Override
-	public void delete(Long id){
+	public void delete(Long id) throws Exception{
 
 		this.repositorio.deleteById(id);
 

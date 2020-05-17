@@ -33,19 +33,20 @@
                             </td> 
                             <td>                    
                                     
-                             <div class="btn-group">
-								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    Transacciones 
-								  </button>
-								  <div class="dropdown-menu">
-								  
-								    <a class="dropdown-item"  th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Compra}" th:method="get">Compra</a>
-								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Ofrecimiento}">Ofrecimiento</a>
-								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Venta}">Venta</a>
-								    <div class="dropdown-divider"></div>
-								    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/list( id = ${articulo.id} )}">Listar</a>
-								  </div>
-								</div>
+                           
+							  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Transacciones 
+							  </button>
+							  
+							  <div class="dropdown-menu">
+							  	<a class="dropdown-item"  th:href="@{/articulo/{id}/detalle( id = ${articulo.id} )}" th:method="get">Detalles</a>							  
+							    <a class="dropdown-item"  th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Compra}" th:method="get">Compra</a>
+							    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Ofrecimiento}">Ofrecimiento</a>
+							    <a class="dropdown-item" th:if="${articulo.enPropiedad} == true" th:href="@{/articulo/{id}/transaccion/( id = ${articulo.id} )} + ${ T(com.galeria.enumeraciones.TipoTransaccion).Venta}">Venta</a>
+							    <div class="dropdown-divider"></div>
+							    <a class="dropdown-item" th:href="@{/articulo/{id}/transaccion/list( id = ${articulo.id} )}">Listar</a>
+							  </div>
+							
                             </td>       
                             <td>
                                 <a class="btn btn-warning" th:href="@{/articulo/editar/} + ${articulo.id}" th:method="get">Editar 
@@ -60,6 +61,8 @@
                 </table>
             </div>
         </div>
+
+        
     </main>
 </body>
 

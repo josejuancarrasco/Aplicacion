@@ -2,7 +2,6 @@ package com.galeria.entidades;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,8 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-
-import com.galeria.enumeraciones.TipoTransaccion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.galeria.enumeraciones.TipoArticulo;
 
 @Entity
@@ -50,18 +48,19 @@ public class Articulo implements Serializable{
 	private String medidas;
 
 	private String pisada;
-
-	@Enumerated(value = EnumType.STRING)
-	private TipoTransaccion estado;
-
+	
 	@Lob
 	private String foto64;
 
+	private boolean enPropiedad;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_artista", nullable = false)
+	@JoinColumn(name = "artista_id", nullable = false)
+	@JsonIgnore
 	private Artista artista;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "articulo")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "articulo")
+	@JsonIgnore
 	private List<Transaccion> transacciones;
 	
 	public Articulo() {
@@ -139,16 +138,6 @@ public class Articulo implements Serializable{
 		this.pisada = pisada;
 	}
 
-
-	public TipoTransaccion getEstado() {
-		return estado;
-	}
-
-	public void setEstado(TipoTransaccion estado) {
-		this.estado = estado;
-	}
-
-
 	public Artista getArtista() {
 		return artista;
 	}
@@ -163,6 +152,20 @@ public class Articulo implements Serializable{
 
 	public void setFoto64(String foto64) {
 		this.foto64 = foto64;
+	}
+	
+	
+
+	public boolean isEnPropiedad() {
+		return enPropiedad;
+	}
+
+	public void setEnPropiedad(boolean enPropiedad) {
+		this.enPropiedad = enPropiedad;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public List<Transaccion> getTransacciones() {

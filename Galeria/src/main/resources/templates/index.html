@@ -5,7 +5,11 @@
 
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
-	<main th:layout:fragment="contenido" role="main" class="container"></main>
-	<footer th:replace="fragments/footer :: footer"></footer>
+	<main th:layout:fragment="contenido" role="main" class="container-fluid pt-4 pb-4">
+		contenido del main
+	</main>
 </body>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
 </html>

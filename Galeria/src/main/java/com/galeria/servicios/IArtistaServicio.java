@@ -2,6 +2,8 @@ package com.galeria.servicios;
 
 import java.util.List;
 
+
+
 import com.galeria.entidades.Artista;
 
 public interface IArtistaServicio {

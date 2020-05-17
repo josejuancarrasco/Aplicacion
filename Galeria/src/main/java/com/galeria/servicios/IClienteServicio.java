@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.naming.NameNotFoundException;
 
-import org.springframework.dao.DataIntegrityViolationException;
-
 import com.galeria.entidades.Cliente;
 
 public interface IClienteServicio {
@@ -19,7 +17,7 @@ public interface IClienteServicio {
 
 	Cliente update(Cliente cliente) throws Exception;
 
-	void delete(Long id) throws DataIntegrityViolationException;
+	void delete(Long id) throws Exception;
 
 	List<Cliente> buscarPorNombre(String nombre) throws NameNotFoundException;
 }

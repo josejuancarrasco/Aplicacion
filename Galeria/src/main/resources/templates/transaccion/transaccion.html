@@ -9,8 +9,8 @@
         	
 	        	<div class="row justify-content-center">
 	        	
-		            <h2 th:text="${editar} == true ? 'Editar Cliente' : 'Agregar Cliente'">  </h2>
-		        
+		            <h2 th:text="${editar} == true ? 'Editar ' : 'Nueva ' + ${tipoTransaccion} ">  </h2>
+   
 		            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
 		                th:text="${mensaje}" class="alert">
 		           	</div>
@@ -22,8 +22,8 @@
 	                <div class="form-group row">>
 	                	
 	                	<div class="col-md-3">
-			               	<label  for="tipoTransccion">Precio</label>
-
+			               	<label  for="precio">Precio</label>
+							<input type="number" class="form-control" id="precio" th:field="*{precio}">	
 			            </div>
 	                
 	                </div>

@@ -2,6 +2,7 @@ package com.galeria.servicios;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galeria.entidades.Artista;
@@ -42,8 +43,12 @@ public class ArtistaServicio implements IArtistaServicio {
 	}
 
 	@Override
-	public void delete(Long id) {
-		this.repositorio.deleteById(id);
+	public void delete(Long id) throws Exception  {
+		try {
+			this.repositorio.deleteById(id);
+		}catch(Exception e) {
+			throw new Exception("No se puede eliminar el artista");
+		}
 	}
 
 }
