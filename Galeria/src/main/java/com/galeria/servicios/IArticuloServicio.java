@@ -5,7 +5,7 @@ import java.util.List;
 import com.galeria.entidades.Articulo;
 
 public interface IArticuloServicio {
-
+	
 	List<Articulo> getAll();
 
 	Articulo getById(Long id) throws Exception;

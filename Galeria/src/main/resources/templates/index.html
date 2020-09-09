@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="fragments/header :: header"></head>
+<head >
+	<title>Welcome to Our Site</title>
+</head>
 
 <body>
-	<nav th:replace="fragments/navbar :: navbar"></nav>
-	<main th:layout:fragment="contenido" role="main" class="container-fluid pt-4 pb-4">
+	<header th:replace="fragments/header :: header"></header>
+	<nav th:insert="fragments/navbar :: navbar"></nav>
+	
+	<section  th:layout:fragment="contenido" role="main" class="container-fluid pt-4 pb-4">
 		contenido del main
-	</main>
+	</section >
+	
 </body>
 
 <footer th:replace="fragments/footer :: footer"></footer>

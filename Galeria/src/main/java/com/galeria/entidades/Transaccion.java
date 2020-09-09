@@ -29,6 +29,7 @@ public class Transaccion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+
 	@Enumerated
 	private TipoTransaccion tipoTransaccion;
 	
@@ -45,7 +46,6 @@ public class Transaccion implements Serializable{
 	public Transaccion() {
 		
 	}
-
 
 	public Long getId() {
 		return id;

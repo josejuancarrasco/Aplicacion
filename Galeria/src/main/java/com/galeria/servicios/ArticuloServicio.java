@@ -19,7 +19,6 @@ public class ArticuloServicio implements IArticuloServicio {
 
 	@Override
 	public List<Articulo> getAll() {
-
 		return (List<Articulo>) this.repositorio.findAll(Sort.by(Direction.DESC, "id"));
 		
 	}

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="index">
-
+<head >
+	<title>Lista de Clientes</title>
+</head>
 <body>
 
     <main layout:fragment="contenido">
@@ -18,7 +20,7 @@
 		            <a class="btn btn-success mb-2" th:href="@{/cliente/add}" th:method="get">Agregar</a>
 		         </div>   
 	         
-		         <div class ="row-12 justify-content-md-center pt-4">
+		         <div th:fragment="tablaCliente" class ="row-12 justify-content-md-center pt-4">
 	                <table id="tablaCliente" class="table table-striped table-bordered" style= "width : 100%" >
 	                    <thead>
 	                        <tr>
